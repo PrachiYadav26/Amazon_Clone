@@ -1,35 +1,35 @@
-// script.js
-
-// ---------------- Search Bar Focus ----------------
+// ---------------- Search Bar Interaction ----------------
 const searchInput = document.querySelector(".search-input");
+
 searchInput.addEventListener("focus", () => {
-  searchInput.style.backgroundColor = "#fff7e6";
+  searchInput.style.backgroundColor = "#fff7e6"; // soft highlight
 });
+
 searchInput.addEventListener("blur", () => {
   searchInput.style.backgroundColor = "white";
 });
 
 // ---------------- Scroll-to-Top Button ----------------
-const scrollBtn = document.createElement("button");
-scrollBtn.innerText = "↑ Top";
-scrollBtn.classList.add("scroll-top");
-document.body.appendChild(scrollBtn);
+const scrollToTopBtn = document.createElement("button");
+scrollToTopBtn.innerText = "↑ Top";
+scrollToTopBtn.classList.add("scroll-top");
+document.body.appendChild(scrollToTopBtn);
 
 window.addEventListener("scroll", () => {
-  scrollBtn.style.display = window.scrollY > 300 ? "block" : "none";
+  scrollToTopBtn.style.display = window.scrollY > 300 ? "block" : "none";
 });
 
-scrollBtn.addEventListener("click", () => {
+scrollToTopBtn.addEventListener("click", () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
-// ---------------- Mini Cart ----------------
-let cartCount = 0;
+// ---------------- Mini Cart Setup ----------------
+let cartItemCount = 0;
 const cartIcon = document.querySelector(".Cart-icon");
 
-// Create a small cart counter bubble
-const cartCounter = document.createElement("span");
-cartCounter.style.cssText = `
+// Create cart badge
+const cartBadge = document.createElement("span");
+cartBadge.style.cssText = `
   background: red;
   color: white;
   font-size: 0.75rem;
@@ -41,13 +41,14 @@ cartCounter.style.cssText = `
   display: none;
 `;
 cartIcon.style.position = "relative";
-cartIcon.appendChild(cartCounter);
+cartIcon.appendChild(cartBadge);
 
+// Click behavior for cart
 cartIcon.addEventListener("click", () => {
-  if (cartCount === 0) {
-    alert("Your cart is currently empty!");
+  if (cartItemCount === 0) {
+    alert("Your cart is empty. Let's add some goodies!");
   } else {
-    alert(`You have ${cartCount} item(s) in your cart.`);
+    alert(`You have ${cartItemCount} item(s) in your cart.`);
   }
 });
 
@@ -63,46 +64,40 @@ const products = [
   { name: "Fitness Tracker", price: 59.99, image: "box8_image.jpg" },
 ];
 
-// Container to hold dynamic products
-const shopSection = document.querySelector(".Shop");
-shopSection.innerHTML = ""; // clear existing static boxes
+const shopContainer = document.querySelector(".Shop");
+shopContainer.innerHTML = ""; // clear old content
 
 products.forEach((product, index) => {
-  const box = document.createElement("div");
-  box.classList.add("box");
-  box.innerHTML = `
+  const productBox = document.createElement("div");
+  productBox.classList.add("box");
+  productBox.innerHTML = `
     <h2>${product.name}</h2>
     <div class="imgBox${index + 1}" style="background-image:url('${product.image}')">
       <p><a href="#">See More</a></p>
     </div>
-    <p style="text-align:center; font-weight:bold; margin:10px 0;">$${product.price}</p>
+    <p style="text-align:center; font-weight:bold; margin:10px 0;">$${product.price.toFixed(2)}</p>
     <div style="display:flex; justify-content:center;">
-      <button class="add-cart">Add to Cart</button>
+      <button class="add-to-cart">Add to Cart</button>
     </div>
   `;
-  shopSection.appendChild(box);
+  shopContainer.appendChild(productBox);
 });
 
 // ---------------- Add to Cart Functionality ----------------
-document.querySelectorAll(".add-cart").forEach((btn) => {
-  btn.addEventListener("click", () => {
-    cartCount++;
-    cartCounter.innerText = cartCount;
-    cartCounter.style.display = "block";
-    alert("Item added to cart!");
+document.querySelectorAll(".add-to-cart").forEach((button) => {
+  button.addEventListener("click", () => {
+    cartItemCount++;
+    cartBadge.innerText = cartItemCount;
+    cartBadge.style.display = "block";
+    alert("🎉 Item added to your cart!");
   });
 });
 
-// ---------------- Live Search ----------------
+// ---------------- Live Search Functionality ----------------
 searchInput.addEventListener("input", () => {
-  const searchTerm = searchInput.value.toLowerCase();
-  const boxes = document.querySelectorAll(".box");
-  boxes.forEach((box) => {
+  const query = searchInput.value.toLowerCase();
+  document.querySelectorAll(".box").forEach((box) => {
     const title = box.querySelector("h2").innerText.toLowerCase();
-    if (title.includes(searchTerm)) {
-      box.style.display = "block";
-    } else {
-      box.style.display = "none";
-    }
+    box.style.display = title.includes(query) ? "block" : "none";
   });
 });
