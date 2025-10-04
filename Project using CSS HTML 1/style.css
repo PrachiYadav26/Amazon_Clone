@@ -1,4 +1,6 @@
-/* Reset and base styles */
+/* =========================
+   Reset & Base Styles
+========================= */
 * {
   margin: 0;
   padding: 0;
@@ -6,7 +8,14 @@
   font-family: Arial, sans-serif;
 }
 
-/* Navbar */
+body {
+  background-color: #f5f5f5;
+  line-height: 1.6;
+}
+
+/* =========================
+   Navbar Styles
+========================= */
 .navbar {
   height: 60px;
   background-color: #0f1111;
@@ -17,66 +26,69 @@
   position: sticky;
   top: 0;
   z-index: 100;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
-/* Logo */
 .nav-logo {
-  height: 50px;
   width: 110px;
+  height: 50px;
 }
 .logo {
   background-image: url("amazon_logo (1).png");
-  height: 50px;
   background-size: contain;
   background-repeat: no-repeat;
   width: 100%;
+  height: 50px;
 }
 
-/* Borders */
+/* =========================
+   Navbar Items & Hover Effects
+========================= */
 .border {
   border: 1.25px solid transparent;
-  transition: border 0.3s;
+  transition: border 0.3s, border-radius 0.3s;
+  padding: 3px 5px;
 }
 .border:hover {
   border: 1.25px solid white;
   border-radius: 4px;
 }
 
-/* Address */
+/* Address Section */
+.nav-address {
+  display: flex;
+  flex-direction: column;
+  margin-left: 8px;
+}
 .add-first {
   color: #cccccc;
   font-size: 0.75rem;
-  margin-left: 15px;
 }
 .add-second {
   color: #ffffff;
   font-size: 1rem;
-  margin-left: 4px;
-}
-.add-icon {
-  display: flex;
-  align-items: center;
-}
-.nav-address {
-  margin-left: 4px;
-  margin-top: 4px;
 }
 
-/* Search bar */
+/* Search Bar */
 .nav-search {
   display: flex;
-  height: 38px;
-  margin-left: 20px;
   flex: 1;
   max-width: 700px;
+  height: 38px;
+  margin-left: 20px;
   border-radius: 4px;
   overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 .search-input {
   flex: 1;
   border: none;
   padding: 0 10px;
   font-size: 1rem;
+}
+.search-input:focus {
+  outline: none;
+  background-color: #fff7e6;
 }
 .search-icon {
   background-color: #febd68;
@@ -92,78 +104,58 @@
 .search-icon:hover {
   background-color: #f3a847;
 }
-.Search-select {
-  background-color: #f3f3f3f6;
-  width: 45px;
-  border: none;
-  border-right: 1px solid rgba(0,0,0,0.2);
-}
 
-/* Language */
+/* =========================
+   Language & Account
+========================= */
 .lang {
   background-color: #0f1111;
   color: white;
-  font-weight: 700;
+  font-weight: bold;
   border: none;
   cursor: pointer;
-}
-
-/* Accounts and orders */
-span {
-  font-size: 0.75rem;
 }
 .Accounts, .order {
   font-size: 0.91rem;
   font-weight: 650;
 }
 
-/* Cart */
+/* Cart Icon */
 .Cart-icon {
-  font-size: 0.85rem;
-  font-weight: 650;
-  cursor: pointer;
   display: flex;
   align-items: center;
+  cursor: pointer;
+  font-weight: 650;
 }
 .Cart-icon i {
   font-size: 1.75rem;
   margin-right: 5px;
 }
 
-/* Panel */
+/* =========================
+   Panel / Navigation Links
+========================= */
 .Panel {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  color: #ffffff;
   background-color: #222f3d;
+  color: #ffffff;
   height: 40px;
+  font-weight: 600;
   font-size: 0.95rem;
-  font-weight: 600;
 }
-.Panel i { font-size: 1.2rem; }
-.panel-ops {
-  width: 75%;
-  font-size: 0.85rem;
-  font-weight: 600;
-}
-.panel-ops p {
-  display: inline-block;
-  margin-left: 15px;
+.panel-ops p, .panel-deals {
   cursor: pointer;
   transition: color 0.3s;
 }
-.panel-ops p:hover { color: #febd68; }
-.panel-deals {
-  font-size: 0.85rem;
-  font-weight: 650;
-  padding: 10px;
-  cursor: pointer;
-  transition: color 0.3s;
+.panel-ops p:hover, .panel-deals:hover {
+  color: #febd68;
 }
-.panel-deals:hover { color: #febd68; }
 
-/* Hero Section */
+/* =========================
+   Hero Section
+========================= */
 .hero-section {
   background-image: url("hero_image.jpg");
   height: 400px;
@@ -177,19 +169,24 @@ span {
 .hero-msg {
   background-color: rgba(255,255,255,0.95);
   color: #0f1111;
+  width: 95%;
+  margin-bottom: 30px;
   height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 95%;
-  margin-bottom: 30px;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
   font-size: 0.95rem;
 }
-.hero-msg a { color: #007185; text-decoration: underline; }
+.hero-msg a {
+  color: #007185;
+  text-decoration: underline;
+}
 
-/* Shop Section */
+/* =========================
+   Shop Section / Products
+========================= */
 .Shop {
   display: flex;
   flex-wrap: wrap;
@@ -203,8 +200,8 @@ span {
   margin-bottom: 20px;
   border-radius: 8px;
   overflow: hidden;
-  transition: transform 0.3s, box-shadow 0.3s;
   cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 .box:hover {
   transform: translateY(-5px);
@@ -215,7 +212,7 @@ span {
   font-size: 1.2rem;
 }
 
-/* Box images */
+/* Product Images */
 [class^="imgBox"] {
   height: 280px;
   background-size: cover;
@@ -245,7 +242,9 @@ span {
   color: #0f1111;
 }
 
-/* Footer */
+/* =========================
+   Footer
+========================= */
 footer {
   background-color: #232f3e;
   color: white;
@@ -260,11 +259,13 @@ footer a {
   transition: color 0.3s;
 }
 footer a:hover {
-  text-decoration: underline;
   color: #f3a847;
+  text-decoration: underline;
 }
 
-/* Scroll-to-top button */
+/* =========================
+   Scroll-to-top Button
+========================= */
 .scroll-top {
   position: fixed;
   bottom: 30px;
@@ -278,18 +279,23 @@ footer a:hover {
   display: none;
   cursor: pointer;
   box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-  transition: background 0.3s;
+  transition: background 0.3s, transform 0.2s;
 }
 .scroll-top:hover {
   background-color: #f3a847;
+  transform: scale(1.1);
 }
 
-/* Responsive */
+/* =========================
+   Responsive Styles
+========================= */
 @media (max-width: 1024px) { .box { width: 45%; } }
 @media (max-width: 768px) { .search-input { width: 100%; } }
 @media (max-width: 480px) { .box { width: 100%; } }
 
-/* Dynamic Product Cards (optional, for JS integration) */
+/* =========================
+   Optional Product Cards for JS Integration
+========================= */
 .products-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -321,6 +327,9 @@ footer a:hover {
   padding: 6px 12px;
   border-radius: 5px;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.2s, transform 0.2s;
 }
-.product-card button:hover { background: #f3a847; }
+.product-card button:hover {
+  background: #f3a847;
+  transform: scale(1.05);
+}
