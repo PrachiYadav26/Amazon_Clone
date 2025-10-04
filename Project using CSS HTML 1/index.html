@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Amazon Clone</title>
-  <link rel="icon" type="image/png" href="amazon_logo.png" />
+  <link rel="icon" href="images/amazon_logo.png" />
+  <!-- Font Awesome from trusted CDN -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
@@ -15,17 +16,13 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- =======================
-       Header / Navbar
-  ======================== -->
+  <!-- Navbar -->
   <header>
     <nav class="navbar" aria-label="Main Navigation">
-      <!-- Logo -->
       <div class="nav-logo border">
-        <div class="logo" aria-label="Amazon Logo"></div>
+        <img src="images/amazon_logo.png" alt="Amazon Logo" class="logo" />
       </div>
 
-      <!-- Delivery Address -->
       <div class="nav-address border">
         <p class="add-first">Deliver to</p>
         <div class="add-icon">
@@ -34,7 +31,6 @@
         </div>
       </div>
 
-      <!-- Search Bar -->
       <div class="nav-search">
         <select class="Search-select" aria-label="Category">
           <option>All</option>
@@ -51,7 +47,6 @@
         </button>
       </div>
 
-      <!-- Language -->
       <div class="Language border">
         <i class="fa-solid fa-flag-usa"></i>
         <select class="lang" aria-label="Language">
@@ -59,29 +54,25 @@
         </select>
       </div>
 
-      <!-- Account & Orders -->
       <div class="nav-signin border">
         <p><span>Hello, sign in</span></p>
         <p class="Accounts">Accounts & Lists</p>
       </div>
+
       <div class="Returns border">
         <p><span>Returns</span></p>
         <p class="order">& Orders</p>
       </div>
 
-      <!-- Cart -->
       <div class="Cart-icon border" aria-label="Shopping Cart">
         <i class="fa-solid fa-cart-shopping"></i>
         Cart (<span class="cart-count">0</span>)
       </div>
     </nav>
 
-    <!-- Panel / Sub-navigation -->
+    <!-- Panel -->
     <div class="Panel" aria-label="Sub Navigation">
-      <div class="all border">
-        <i class="fa-solid fa-bars"></i>
-        All
-      </div>
+      <div class="all border"><i class="fa-solid fa-bars"></i> All</div>
       <div class="panel-ops">
         <p>Today's Deals</p>
         <p>Prime Video</p>
@@ -89,17 +80,12 @@
         <p>Customer Service</p>
         <p>Sell</p>
       </div>
-      <div class="panel-deals border">
-        Shop deals in Electronics
-      </div>
+      <div class="panel-deals border">Shop deals in Electronics</div>
     </div>
   </header>
 
-  <!-- =======================
-       Main Content
-  ======================== -->
+  <!-- Hero Section -->
   <main>
-    <!-- Hero Section -->
     <section class="hero-section" aria-label="Hero Banner">
       <div class="hero-msg">
         <p>
@@ -110,7 +96,7 @@
       </div>
     </section>
 
-    <!-- Static Shop Categories -->
+    <!-- Shop Categories -->
     <section class="Shop" aria-label="Shop Categories">
       <div class="box">
         <h2>Health and Personal Care</h2>
@@ -126,13 +112,13 @@
       </div>
     </section>
 
-    <!-- Dynamic Product Listing -->
+    <!-- Dynamic Products -->
     <section class="products-section" aria-label="Featured Products">
       <h2>Featured Products</h2>
       <div class="products-container"></div>
     </section>
 
-    <!-- Shopping Cart -->
+    <!-- Cart -->
     <section class="cart-section" aria-label="Shopping Cart">
       <h2>Your Cart</h2>
       <div class="cart-items"></div>
@@ -140,14 +126,12 @@
     </section>
   </main>
 
-  <!-- =======================
-       Footer
-  ======================== -->
+  <!-- Footer -->
   <footer>
     <p><a href="#">Back to Top</a></p>
     <p>
-      <a href="#">Careers</a> | 
-      <a href="#">Privacy Policy</a> | 
+      <a href="#">Careers</a> |
+      <a href="#">Privacy Policy</a> |
       <a href="#">Terms of Service</a>
     </p>
     <p>&copy; 2025 Amazon Clone by Your Name</p>
