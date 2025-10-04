@@ -1,103 +1,114 @@
-// ---------------- Search Bar Interaction ----------------
+// ---------------- Search Bar Focus ----------------
 const searchInput = document.querySelector(".search-input");
-
 searchInput.addEventListener("focus", () => {
-  searchInput.style.backgroundColor = "#fff7e6"; // soft highlight
+  searchInput.style.backgroundColor = "#fff7e6";
 });
-
 searchInput.addEventListener("blur", () => {
   searchInput.style.backgroundColor = "white";
 });
 
 // ---------------- Scroll-to-Top Button ----------------
-const scrollToTopBtn = document.createElement("button");
-scrollToTopBtn.innerText = "↑ Top";
-scrollToTopBtn.classList.add("scroll-top");
-document.body.appendChild(scrollToTopBtn);
+const scrollBtn = document.createElement("button");
+scrollBtn.innerText = "↑ Top";
+scrollBtn.classList.add("scroll-top");
+document.body.appendChild(scrollBtn);
 
 window.addEventListener("scroll", () => {
-  scrollToTopBtn.style.display = window.scrollY > 300 ? "block" : "none";
+  scrollBtn.style.display = window.scrollY > 300 ? "block" : "none";
 });
 
-scrollToTopBtn.addEventListener("click", () => {
+scrollBtn.addEventListener("click", () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
-// ---------------- Mini Cart Setup ----------------
-let cartItemCount = 0;
+// ---------------- Mini Cart ----------------
+let cartCount = 0;
 const cartIcon = document.querySelector(".Cart-icon");
-
-// Create cart badge
-const cartBadge = document.createElement("span");
-cartBadge.style.cssText = `
-  background: red;
-  color: white;
-  font-size: 0.75rem;
-  border-radius: 50%;
-  padding: 2px 6px;
-  position: absolute;
-  top: 5px;
-  right: 10px;
-  display: none;
-`;
-cartIcon.style.position = "relative";
-cartIcon.appendChild(cartBadge);
-
-// Click behavior for cart
-cartIcon.addEventListener("click", () => {
-  if (cartItemCount === 0) {
-    alert("Your cart is empty. Let's add some goodies!");
-  } else {
-    alert(`You have ${cartItemCount} item(s) in your cart.`);
-  }
-});
+const cartCounter = document.querySelector(".cart-count");
+const cartItemsContainer = document.querySelector(".cart-items");
+const cartTotal = document.querySelector(".cart-total span");
 
 // ---------------- Dynamic Products ----------------
 const products = [
-  { name: "Wireless Headphones", price: 59.99, image: "box1_image.jpg" },
-  { name: "Smartwatch", price: 129.99, image: "box2_image.jpg" },
-  { name: "Portable Charger", price: 25.99, image: "box3_image.jpg" },
-  { name: "Bluetooth Speaker", price: 49.99, image: "box4_image.jpg" },
-  { name: "Camera Lens", price: 199.99, image: "box5_image.jpg" },
-  { name: "Gaming Mouse", price: 39.99, image: "box6_image.jpg" },
-  { name: "LED Desk Lamp", price: 29.99, image: "box7_image.jpg" },
-  { name: "Fitness Tracker", price: 59.99, image: "box8_image.jpg" },
+  { name: "Wireless Headphones", price: 59.99, image: "images/box1_image.jpg" },
+  { name: "Smartwatch", price: 129.99, image: "images/box2_image.jpg" },
+  { name: "Portable Charger", price: 25.99, image: "images/box3_image.jpg" },
+  { name: "Bluetooth Speaker", price: 49.99, image: "images/box4_image.jpg" },
+  { name: "Camera Lens", price: 199.99, image: "images/box5_image.jpg" },
+  { name: "Gaming Mouse", price: 39.99, image: "images/box6_image.jpg" },
+  { name: "LED Desk Lamp", price: 29.99, image: "images/box7_image.jpg" },
+  { name: "Fitness Tracker", price: 59.99, image: "images/box8_image.jpg" },
 ];
 
-const shopContainer = document.querySelector(".Shop");
-shopContainer.innerHTML = ""; // clear old content
+const productsContainer = document.querySelector(".products-container");
 
-products.forEach((product, index) => {
-  const productBox = document.createElement("div");
-  productBox.classList.add("box");
-  productBox.innerHTML = `
-    <h2>${product.name}</h2>
-    <div class="imgBox${index + 1}" style="background-image:url('${product.image}')">
-      <p><a href="#">See More</a></p>
-    </div>
-    <p style="text-align:center; font-weight:bold; margin:10px 0;">$${product.price.toFixed(2)}</p>
-    <div style="display:flex; justify-content:center;">
-      <button class="add-to-cart">Add to Cart</button>
-    </div>
-  `;
-  shopContainer.appendChild(productBox);
-});
+function renderProducts(list) {
+  productsContainer.innerHTML = "";
+  list.forEach((product, index) => {
+    const card = document.createElement("div");
+    card.classList.add("product-card");
+    card.innerHTML = `
+      <img src="${product.image}" alt="${product.name}" />
+      <h3>${product.name}</h3>
+      <p>$${product.price.toFixed(2)}</p>
+      <button data-index="${index}">Add to Cart</button>
+    `;
+    productsContainer.appendChild(card);
+  });
+
+  // Add click listeners to buttons
+  document.querySelectorAll(".product-card button").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const i = e.target.dataset.index;
+      addToCart(products[i]);
+    });
+  });
+}
 
 // ---------------- Add to Cart Functionality ----------------
-document.querySelectorAll(".add-to-cart").forEach((button) => {
-  button.addEventListener("click", () => {
-    cartItemCount++;
-    cartBadge.innerText = cartItemCount;
-    cartBadge.style.display = "block";
-    alert("🎉 Item added to your cart!");
+function addToCart(product) {
+  cartCount++;
+  cartCounter.innerText = cartCount;
+
+  // Add product to cart items container
+  const item = document.createElement("div");
+  item.classList.add("cart-item");
+  item.innerHTML = `
+    ${product.name} - $${product.price.toFixed(2)}
+  `;
+  cartItemsContainer.appendChild(item);
+
+  // Update total
+  const currentTotal = parseFloat(cartTotal.innerText);
+  cartTotal.innerText = (currentTotal + product.price).toFixed(2);
+}
+
+// Cart icon click
+cartIcon.addEventListener("click", () => {
+  if (cartCount === 0) {
+    alert("Your cart is currently empty!");
+  } else {
+    alert(`You have ${cartCount} item(s) in your cart.`);
+  }
+});
+
+// ---------------- Live Search ----------------
+searchInput.addEventListener("input", () => {
+  const searchTerm = searchInput.value.toLowerCase();
+
+  // Filter dynamic products
+  const filteredProducts = products.filter((p) =>
+    p.name.toLowerCase().includes(searchTerm)
+  );
+  renderProducts(filteredProducts);
+
+  // Optionally: filter static boxes
+  const boxes = document.querySelectorAll(".Shop .box");
+  boxes.forEach((box) => {
+    const title = box.querySelector("h2").innerText.toLowerCase();
+    box.style.display = title.includes(searchTerm) ? "block" : "none";
   });
 });
 
-// ---------------- Live Search Functionality ----------------
-searchInput.addEventListener("input", () => {
-  const query = searchInput.value.toLowerCase();
-  document.querySelectorAll(".box").forEach((box) => {
-    const title = box.querySelector("h2").innerText.toLowerCase();
-    box.style.display = title.includes(query) ? "block" : "none";
-  });
-});
+// Initial render
+renderProducts(products);
